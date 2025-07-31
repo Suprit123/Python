@@ -35,3 +35,38 @@ print(globals())
 # In the below function we are going to replace opsf with ospf by using replace method.
 commands = """router opfs"""
 print(commands.replace("opfs", "ospf"))
+
+# If you want to specify the data type of a variable , this can be done with casting
+x = str(3)
+y = int(3)
+z = float(3)
+print(x,y,z)
+
+# You can get the data type of a variable with the type() function
+x = 5
+y = "five"
+z = 5.0
+print(type(x))
+print(type(y))
+print(type(z))
+
+# Assigning values to multiple variables
+x,y,z = "Orange", "Banana", "Cherry"
+print(x + y + z) # or you can print in below format as well
+print(x)
+print(y)
+print(z)
+
+# Assigning one vlaue to multiple variables
+Apple = Banana = Mango = "I love all these fruits"
+print(Apple)
+print(Banana)
+print(Mango)
+print(Apple, Banana, Mango)
+
+# If you have collection of values in list, tuples etc. Python allows you to extract the values into variables. This is called unpacking
+fruits = ['apple', 'banana', 'cherry']
+x, y, z = fruits
+print(x)
+print(y)
+print(z)
