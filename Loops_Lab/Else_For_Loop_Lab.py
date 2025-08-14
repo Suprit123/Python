@@ -19,7 +19,7 @@ else:
 numbers = [2, 4, 6, 8, 10]
 for num in numbers:
     if num == 5:
-        print("Not Found!")
+        print("Found!")
         break
 else:
     print("Not Found.")
