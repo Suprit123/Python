@@ -21,12 +21,12 @@ commands_to_R1 = list(
     )
 )
 
-# Send the configuration commands to the router
+# Send the configuration commands to the router. Here we call the name of the ConnectHandler class from line 13.
 int_config = Connection_to_R1.send_config_set(commands_to_R1)
 # Print the output of the configuration commands
 print(int_config)
 
-# Show the interface status
+# Show the interface status. Here we call the name of the ConnectHandler class from line 13.
 int_show = Connection_to_R1.send_command("show ip int brief")
 # Print the output of the show command
 print(int_show)
