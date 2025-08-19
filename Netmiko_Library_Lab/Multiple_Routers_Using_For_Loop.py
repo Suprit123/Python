@@ -48,9 +48,7 @@ for routers in devices:
         interface_config = connect_to_devices.send_config_set(commands)
         print(f"Configured {int_name} on {routers} with IP {ip_address}")
 
-        output = connect_to_devices.send_command(
-            input("Enter the command to execute: ")
-        )
+        output = connect_to_devices.send_command(input("Enter a command to execute: "))
         print(output)
 
 connect_to_devices.disconnect()
