@@ -25,7 +25,7 @@ for routers in devices:
 
     # Connect to the device
     connect_to_routers = ConnectHandler(**device_details)
-    print(f"Connected to {routers} successfully..!!")
+    print(f"Connected to {routers} successfully...!")
 
     user_input = int(input("enter the number of interface to be configured: "))
 
