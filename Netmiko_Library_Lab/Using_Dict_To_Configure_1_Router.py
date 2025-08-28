@@ -22,7 +22,7 @@ router_details = {
 }
 
 connect_to_device = ConnectHandler(**router_details)
-print(f"ssh connection eastablished with {router_ip} successfully..!")
+print(f"ssh connection eastablished with {router_ip} successfully...!")
 
 user_input = int(input("enter the number of interface you want to configure: "))
 
