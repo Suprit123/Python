@@ -42,19 +42,19 @@ for routers in router_list:
     send_config = ssh_connection.send_config_set(bgp_config)
     print(f" Configuration applied successfully to {routers}:\n{send_config}")
 
-    # Run the 'show ip bgp summary' to verify BGP
-    bgp_output = ssh_connection.send_command("show ip bgp summary")
-    print(f"BGP Summary for applied in {routers}:\n{bgp_output}")
+# Run the 'show ip bgp summary' to verify BGP
+bgp_output = ssh_connection.send_command("show ip bgp summary")
+print(f"BGP Summary for applied in {routers}:\n{bgp_output}")
 
-    # Check the bgp peerig status based on the output string from the last router.
-    if "Idle" in bgp_output:
-        print(f"⚠️ BGP peer is not eastablished {routers}")
+# Check the bgp peerig status based on the output string from the last router.
+if "Idle" in bgp_output:
+    print(f"⚠️ BGP peer is not eastablished {routers}")
 
-    elif "Established" in bgp_output or "EASTABLISHED" in bgp_output:
-        print(f"✅ BGP peering is up {routers}")
+elif "Established" in bgp_output or "EASTABLISHED" in bgp_output:
+    print(f"✅ BGP peering is up {routers}")
 
-    else:
-        print(f"❓ Unknow bgp state on {routers}, check manually")
+else:
+    print(f"❓ Unknow bgp state on {routers}, check manually")
 
-    # Disconnect the SSH session from the last router.
-    ssh_connection.disconnect()
+# Disconnect the SSH session from the last router.
+ssh_connection.disconnect()
