@@ -30,3 +30,6 @@ print(items)
 # To determine if a specified key is present in a dictionary use the in keyword:
 if "model" in my_car:
     print("Yes, 'model' is one of the key in the my_car dictionary")
+
+for key, value in my_car.items():
+    print(f" key: {key}: {value}")
