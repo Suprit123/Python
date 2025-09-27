@@ -1,54 +1,69 @@
+# Importing ConnectHandler from Netmiko to handle SSH connections to network devices
 from netmiko import ConnectHandler
 
-# Here we are using the getpass library to securely handle passwords
+# Importing getpass to securely input passwords without showing them on the screen
 from getpass import getpass
 
-
+# Prompting user for login credentials
 username = input("Enter your username: ")
-# Here we call the getpass library to securely handle the password input
-password = getpass("Enter your password: ")
+password = getpass("Enter your password: ")  # Securely handle password input
 
-# We are creating the variables for the routers.
-# R = "172.16.166.129"
-R1 = "172.16.166.131"
-R2 = "172.16.166.132"
-R3 = "172.16.166.129"
+# Defining IP addresses of Cisco routers we want to connect to
+router1_ip = "172.16.166.131"
+router2_ip = "172.16.166.132"
+router3_ip = "172.16.166.129"
 
-# Calling the list of routers
-devices = [R1, R2, R3]
+# Storing all router IPs in a list to loop through them later
+router_ip_list = [router1_ip, router2_ip, router3_ip]
 
-# Looping through the list of routers
-for routers in devices:
-    device_details = {
-        "device_type": "cisco_ios",
-        "ip": routers,
-        "username": username,
-        "password": password,
+# Loop through each router's IP to establish a connection and configure interfaces
+for router_ip in router_ip_list:
+    # Creating a dictionary with connection parameters for Netmiko
+    device_params = {
+        "device_type": "cisco_ios",  # Define the platform (Cisco IOS)
+        "ip": router_ip,  # IP of the current router
+        "username": username,  # Username input by user
+        "password": password,  # Password input by user
     }
 
-    connect_to_devices = ConnectHandler(**device_details)
-    print(f"Connected to {routers} successfully..!!")
+    # Establish SSH connection to the router using Netmiko
+    ssh_connection = ConnectHandler(**device_params)
+    print(f"✅ Connected to {router_ip} successfully!")
 
-    user_input = int(
+    # Ask user how many interfaces they want to configure on this router
+    interface_count = int(
         input("Enter the number of interfaces that you want to configure: ")
     )
 
-    for interface in range(user_input):
-        int_name = input("Enter the interface name (e.g., GigabitEthernet0/0): ")
-        ip_address = input("Enter the IP address for the interface: ")
-        int_mask = input("Enter the subnet mask (e.g., 255.255.255.0): ")
-        int_description = input("Enter the interface description: ")
+    # Loop through the number of interfaces to configure each one
+    for _ in range(interface_count):
+        # Collect interface configuration details from user
+        interface_name = input("Enter the interface name (e.g., GigabitEthernet0/0): ")
+        interface_ip = input("Enter the IP address for the interface: ")
+        subnet_mask = input("Enter the subnet mask (e.g., 255.255.255.0): ")
+        description = input("Enter the interface description: ")
 
-        commands = [
-            f"interface {int_name}",
-            f"ip address {ip_address} {int_mask}",
-            f"description {int_description}",
+        # Create a list of commands to send to the router
+        config_commands = [
+            f"interface {interface_name}",
+            f"ip address {interface_ip} {subnet_mask}",
+            f"description {description}",
         ]
 
-        interface_config = connect_to_devices.send_config_set(commands)
-        print(f"Configured {int_name} on {routers} with IP {ip_address}")
+        # Send configuration commands to the router
+        ssh_connection.send_config_set(config_commands)
+        print(f"🛠️ Configured {interface_name} on {router_ip} with IP {interface_ip}")
 
-        output = connect_to_devices.send_command(input("Enter a command to execute: "))
-        print(output)
+        # Ask the user for a show or verification command to execute
+        verification_command = input(
+            "Enter a command to execute (e.g., show ip int brief): "
+        )
+        command_output = ssh_connection.send_command(verification_command)
 
-connect_to_devices.disconnect()
+        # Print the output of the command
+        print("📄 Command Output:")
+        print(command_output)
+
+    # Close SSH connection after configuration
+    ssh_connection.disconnect()
+    print(f"🔌 Disconnected from {router_ip}\n")
