@@ -35,3 +35,28 @@ def my_car_function(model, brand):
 
 
 my_car_function("X-Line", "kia")
+
+
+# The following example shows how to use a default parameter value.
+
+# If we call the function without argument, it uses the default value:
+
+
+def my_country(country="India"):
+    print(f"I am from {country}")
+
+
+my_country("Sweden")
+my_country()
+my_country("Singapore")
+
+# You can send any data types of argument to a function (string, number, list, dictionary etc.), and it will be treated as the same data type inside the function.
+
+
+def my_fruits(food):
+    for x in food:
+        print(x)
+
+
+fruits = ["apple", "banana", "cherry"]
+my_fruits(fruits)
