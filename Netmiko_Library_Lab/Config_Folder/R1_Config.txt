@@ -1,0 +1,14 @@
+interface GigabitEthernet0/1
+ ip address 10.0.0.1 255.255.255.0
+ no shutdown
+
+interface GigabitEthernet0/2
+ ip address 10.0.1.1 255.255.255.0
+ no shutdown
+
+
+router bgp 100
+neighbor 10.0.0.2 remote-as 200
+network 10.0.0.0 mask 255.0.0.0
+
+do show ip bgp summary
