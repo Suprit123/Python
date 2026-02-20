@@ -8,6 +8,7 @@ from getpass import getpass
 R1 = "172.16.166.129"
 R2 = "172.16.166.131"
 
+# Create list of router that we want to connect to. This will allow us to use a for loop to connect to the routers and send the commands to the routers
 router_list = [R1, R2]
 
 # List of commands to be sent to the routers
