@@ -19,20 +19,20 @@ for r_name, r_rip in router_dict.items():
     username = input("Enter your username: ")
     password = getpass("Enter your password: ")
 
-    # Connect to the device and send the commands
-    ssh = ConnectHandler(
-        device_type="cisco_ios",
-        host=r_rip,
-        username=username,
-        password=password,
-    )
+# Connect to the device and send the commands
+ssh = ConnectHandler(
+    device_type="cisco_ios",
+    host=r_rip,
+    username=username,
+    password=password,
+)
 
-    # Use for loop as we have multiple commands to send and print the output
-    for c in commands:
-        show_output = ssh.send_command(c)
-        # Print the output of the commands with the command name for better readability
-        print(f'=== Output of "{c}" ===\n{show_output}\n')
-        # Print a new line for better readability
-        print("\n")
+# Use for loop as we have multiple commands to send and print the output
+for c in commands:
+    show_output = ssh.send_command(c)
+    # Print the output of the commands with the command name for better readability
+    print(f'=== Output of "{c}" ===\n{show_output}\n')
+    # Print a new line for better readability
+    print("\n")
     # Disconnect from the device
-    ssh.disconnect()
+ssh.disconnect()
