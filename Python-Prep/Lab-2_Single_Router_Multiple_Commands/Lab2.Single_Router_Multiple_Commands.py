@@ -2,7 +2,7 @@ from netmiko import ConnectHandler
 from getpass import getpass
 
 # Using a dictionary to store the hostname and ip address of the device
-router_dict = {"R1": "172.16.166.131"}
+router_dict = {"R1": "172.16.166.129"}
 
 # Commands to be send to the device
 commands = [
