@@ -6,6 +6,7 @@ from getpass import getpass
 
 # Dictionary of the routers with their hostnames and ip addresses
 
+# Dictionary of the routers with their hostnames and ip addresses
 router_dict = {
     "R1": "172.16.166.129",
     "R2": "172.16.166.131",
