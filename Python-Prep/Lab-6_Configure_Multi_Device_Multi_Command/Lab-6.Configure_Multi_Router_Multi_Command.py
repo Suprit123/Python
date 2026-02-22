@@ -1,4 +1,5 @@
 from netmiko import ConnectHandler
+
 from getpass import getpass
 
 # Define device dictionary
