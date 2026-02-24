@@ -29,7 +29,7 @@ for r_name, r_ip in router_dict.items():
         username=username,
         password=password,
     )
-    print(f"=== Successfully connected to {r_name} ===\n")
+    print(f"=== Successfully connected to {r_name} {r_ip['vendor']} ===\n")
 
     # Create a if-else statement to check the vendor of the device and send the commands accordingly.
     if r_ip["vendor"] == "cisco_ios":
