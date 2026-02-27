@@ -1,0 +1,9 @@
+---
+# Vlan list configuration for Cisco devices
+vlans:
+  - id: 10
+    name: "Testing"
+  - id: 20
+    name: "Development"
+  - id: 30
+    name: "Production"

@@ -1,0 +1,9 @@
+---
+# Vlan list for Arista devices
+vlans:
+  - id: 40
+    name: "Testing"
+  - id: 50
+    name: "Development"
+  - id: 60
+    name: "Production"
