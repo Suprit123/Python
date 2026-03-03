@@ -1,0 +1,7 @@
+# Groups of devices
+---
+cisco:
+  platform: cisco_ios
+
+arista:
+  platform: arista_eos
