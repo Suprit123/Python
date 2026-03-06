@@ -1,0 +1,11 @@
+# Host details for Nornir inventory
+---
+R1:
+  hostname: "172.16.166.129"
+  groups:
+    - cisco
+
+vEOS1:
+  hostname: "172.16.166.132"
+  groups:
+    - arista

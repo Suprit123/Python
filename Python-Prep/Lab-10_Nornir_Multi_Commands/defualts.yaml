@@ -1,0 +1,2 @@
+# Emtpty dictionary as we will set the default username and password using getpass library
+{}
