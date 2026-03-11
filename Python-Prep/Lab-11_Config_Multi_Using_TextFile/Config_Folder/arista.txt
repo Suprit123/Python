@@ -1,0 +1,9 @@
+interface Ethernet1
+ no switchport
+ ip add 192.168.1.2/24
+ no shut
+
+interface Ethernet2
+ no switchport
+ ip add 192.168.2.2/24
+ no shut
