@@ -1,3 +1,4 @@
+# Interface Configuration
 interface Ethernet1
  no switchport
  ip add 192.168.1.2/24
@@ -7,3 +8,11 @@ interface Ethernet2
  no switchport
  ip add 192.168.2.2/24
  no shut
+
+# Enable ip routing
+ip routing
+
+# Bgp Configuration
+router bgp 2 
+ router-id 2.2.2.2
+ neighbor 192.168.1.1 remote-as 1

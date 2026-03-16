@@ -1,7 +1,13 @@
-interface Gig0/1
+# Interface Configuration
+interface Gi0/1
  ip add 192.168.1.1 255.255.255.0
  no shut
 
 interface Gig0/2
  ip add 192.168.2.1 255.255.255.0
  no shut
+
+# Bgp Configuration
+router bgp 1
+ bgp router-id 1.1.1.1
+ neighbor 192.168.1.2 remote-as 2

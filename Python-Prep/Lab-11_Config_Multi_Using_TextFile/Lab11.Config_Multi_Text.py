@@ -19,11 +19,13 @@ devices = {
     },
 }
 
+commands = ["show ip int brief", "show ip bgp summary"]
+
 # Loop through the routers
 for r_name, r_ip in devices.items():
     username = input("Enter your username: ")
     password = getpass("Enter your password: ")
-    print(f"=== Connection to {r_name} ({r_ip['ip']})is successfull ===: ")
+    print(f"=== Connection to {r_name} ({r_ip['ip']}) is successfull ===: ")
 
     # Define the full path to the config file in "Config_Folder"
     config_path = os.path.join(folder, r_ip["config_file"])
@@ -33,9 +35,13 @@ for r_name, r_ip in devices.items():
         print(f"Config File not found: {config_path}")
         continue
 
-    # Read the configurations commands and split them into individual CLI command lines
+    # Read the configurations commands and split them into individual CLI command lines and ingore the # comments from the text file
     with open(config_path, "r") as f:
-        config_line = f.read().splitlines()
+        config_line = [
+            line.strip()
+            for line in f.readlines()
+            if line.strip() and not line.strip().startswith("#")
+        ]
 
     try:
         ssh = ConnectHandler(
@@ -43,6 +49,7 @@ for r_name, r_ip in devices.items():
             ip=r_ip["ip"],
             username=username,
             password=password,
+            global_delay_factor=2,
         )
 
         print(f"Connected to {r_name}. Send Config: ")
@@ -52,8 +59,15 @@ for r_name, r_ip in devices.items():
             ssh.enable()
 
         # Send config to the devices
-        output = ssh.send_config_set(config_line)
-        print(f"Configuration output for {r_name}:\n {output}")
+        push_config = ssh.send_config_set(config_line)
+        print(f"Configuration output for {r_name}:\n {push_config}")
+
+        # Verify the configuration of the devices.
+        for c in commands:
+            output = ssh.send_command(c)
+            print(f"\n=== {c} output for {r_name} ===")
+            print(output)
+            print("===\n")
 
     except Exception as e:
         print(f"Error connecting to {r_name}: {e}")
