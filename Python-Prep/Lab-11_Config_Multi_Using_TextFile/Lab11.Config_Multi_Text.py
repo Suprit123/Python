@@ -1,31 +1,24 @@
 from netmiko import ConnectHandler
 import os
+import yaml
 from getpass import getpass
 
 # Define the config folder path from the directory
 folder = "Config_Folder"
 
-# Device Info
-devices = {
-    "Cisco": {
-        "device_type": "cisco_ios",
-        "ip": "172.16.166.129",
-        "config_file": "cisco.txt",
-    },
-    "Arista": {
-        "device_type": "arista_eos",
-        "ip": "172.16.166.132",
-        "config_file": "arista.txt",
-    },
-}
+# Load the devices from the devices.yaml file
+with open("devices.yaml", "r") as f:
+    devices = yaml.safe_load(f)
 
-commands = ["show ip int brief", "show ip bgp summary"]
+# Load the verification commands from the commands.yaml file
+with open("commands.yaml", "r") as f:
+    commands = yaml.safe_load(f)["commands"]
 
 # Loop through the routers
 for r_name, r_ip in devices.items():
     username = input("Enter your username: ")
     password = getpass("Enter your password: ")
-    print(f"=== Connection to {r_name} ({r_ip['ip']}) is successfull ===: ")
+    print(f"=== Connection to {r_name} ({r_ip['ip']}) is successfull === : ")
 
     # Define the full path to the config file in "Config_Folder"
     config_path = os.path.join(folder, r_ip["config_file"])
@@ -52,7 +45,7 @@ for r_name, r_ip in devices.items():
             global_delay_factor=2,
         )
 
-        print(f"Connected to {r_name}. Send Config: ")
+        print(f"Connected to {r_name}. Sending Config: ")
 
         # Enter in enable mode if not alredy in it (Arista device)
         if not ssh.check_enable_mode():

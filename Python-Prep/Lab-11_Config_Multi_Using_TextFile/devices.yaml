@@ -1,0 +1,11 @@
+# Cisco Devices
+Cisco:
+  device_type: cisco_ios
+  ip: 172.16.166.129
+  config_file: cisco.txt
+
+# Arista Devices
+Arista:
+  device_type: arista_eos
+  ip: 172.16.166.132
+  config_file: arista.txt

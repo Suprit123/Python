@@ -1,0 +1,3 @@
+commands:
+  - show ip int brief
+  - show ip bgp summary
