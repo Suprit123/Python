@@ -34,7 +34,7 @@ with manager.connect(
     # Fetch the interface confi using the get_config() method and passing the fiter as and argument
     int_config = n.get_config(source="running", filter=int_filter)
 
-    # Converting the deserialized output of data in serialized manner using parseString() method
+    # Converting the deserialized output of data in serialized manner using parseString() methodcof
     int_config_xml = parseString(int_config.xml).toprettyxml()
 
     # Create a text file and save the output of interface config in text file
