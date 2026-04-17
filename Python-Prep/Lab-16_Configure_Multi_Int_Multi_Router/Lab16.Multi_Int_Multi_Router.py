@@ -1,5 +1,4 @@
 # Import ncclinet library
-from logging import config
 
 from ncclient import manager
 
