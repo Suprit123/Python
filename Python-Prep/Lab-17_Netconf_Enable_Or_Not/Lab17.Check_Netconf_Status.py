@@ -11,7 +11,7 @@ routers = {
     "R2": "192.168.42.130"
 }
 
-# Create a loop to connect to each device 
+# Create a loop to connect to each device
 for r_name,r_ip in routers.items():
     print(f" === Connecting to {r_name} with IP {r_ip} === ")
     # Create a dictionary for device information
@@ -21,10 +21,10 @@ for r_name,r_ip in routers.items():
         "username": input("Enter your username: "),
         "password": getpass("Enter your password: "),
     }
-    
+
     # Connect to the device using ConnectHandler
     with ConnectHandler(**device) as connect:
-        
+
         # check if Netconf is enabled
         show = connect.send_command("show run | i netconf")
         if "netconf" in show:
@@ -32,10 +32,10 @@ for r_name,r_ip in routers.items():
         else:
             print(f"Netconf is not enabled on {r_name}")
             print(f"Enabling Netconf on {r_name}: ")
-            
+
             # Enable Netconf
             connect.send_config_set(["netconf-yang", "netconf-ssh"])
-            
+
             # Verify Netconf is enabled
             verify = connect.send_command("show run | i netconf")
             if "netconf" in verify:
