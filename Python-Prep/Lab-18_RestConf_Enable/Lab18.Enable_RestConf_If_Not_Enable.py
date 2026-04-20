@@ -50,3 +50,7 @@ for r_name, r_info in routers.items():
                 print(f"RestConf is now enabled on {r_name}")
             else:
                 print(f"RestConf is still not enabled on {r_name}")
+                
+            # save the configuration
+            print(f"Saving the config on {r_name}")
+            c.save_config()
