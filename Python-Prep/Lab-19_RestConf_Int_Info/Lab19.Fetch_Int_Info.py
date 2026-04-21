@@ -8,8 +8,8 @@ from requests.auth import HTTPBasicAuth
 from getpass import getpass
 
 # Define the URL to connect to the RESTCONF API endpoint for fetching interface information
-api_url = "https://192.168.42.129/restconf/data/ietf-interfaces:interfaces"
-print(f"Connecting to {api_url} to fetch interface information...")
+get = "https://192.168.42.129/restconf/data/ietf-interfaces:interfaces"
+print(f"Connecting to {get} to fetch interface information...")
 
 # Use the creads to login to the devices
 creds = HTTPBasicAuth(username = "admin", password = getpass("Enter your password: "))
@@ -21,7 +21,7 @@ headers = {
 }
 
 # Use the get.request method to send the GET request to the specified URL with the provided credentials and headers
-response = requests.get(url = api_url, auth = creds, headers = headers, verify = False)
+response = requests.get(url = get, auth = creds, headers = headers, verify = False)
 
 # Print the response in text format and status code to check if the request was successful
 print(response.text)
