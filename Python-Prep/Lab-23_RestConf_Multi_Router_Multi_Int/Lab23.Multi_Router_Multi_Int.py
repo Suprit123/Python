@@ -115,3 +115,8 @@ for r, i in routers.items():
             print(f"Response Body: {response.text}")
         else:
             print(f"Successfully configured {r} {intf_name}")
+            
+        # Verify the configuration by sending a GET request to the same endpoint
+        verify_response = requests.get(url=url, auth=creds, headers=headers, verify=False)
+        print(f"Verification Response Status Code for {r} {intf_name}: {verify_response.status_code}")
+   
